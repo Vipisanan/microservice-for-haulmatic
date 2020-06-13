@@ -1,5 +1,6 @@
 package com.example.microserviceforhaulmatic.controller;
 
+import com.example.microserviceforhaulmatic.DTO.RoleDTO;
 import com.example.microserviceforhaulmatic.model.RoleModel;
 import com.example.microserviceforhaulmatic.service.RoleService;
 import io.swagger.annotations.Api;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/role")
-@Api(value="microservice", description="Haulmatic microservice")
+@Api(value = "microservice", description = "Haulmatic microservice")
 
 public class RolesController {
     private RoleService roleService;
@@ -23,11 +24,12 @@ public class RolesController {
 
     @ApiOperation(value = "View a list of employees", response = Iterable.class)
     @GetMapping
-    public List<RoleModel> getAll(){
+    public List<RoleModel> getAll() {
         return roleService.getAll();
     }
+
     @PostMapping
-    public RoleModel addEmployer(@RequestBody RoleModel roleModel){
-        return roleService.addEmployer(roleModel);
+    public RoleModel addEmployer(@RequestBody RoleDTO roleDTO) {
+        return roleService.addEmployer(roleDTO);
     }
 }

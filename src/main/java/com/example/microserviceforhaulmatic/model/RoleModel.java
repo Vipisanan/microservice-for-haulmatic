@@ -28,7 +28,7 @@ public class RoleModel {
     private String lastName;
 
     @Indexed(name = "NICno")
-    private int NICno;
+    private String NICno;
 
     @Indexed(name = "roleType")
     private String roleType;
@@ -36,7 +36,7 @@ public class RoleModel {
     public RoleModel() {
     }
 
-    public RoleModel(String id, Date createdDate, Date lastModifiedDate, String organization, String firstName, String lastName, int NICno, String roleType) {
+    public RoleModel(String id, Date createdDate, Date lastModifiedDate, String organization, String firstName, String lastName, String NICno, String roleType) {
         this.id = id;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
@@ -79,11 +79,11 @@ public class RoleModel {
         this.lastName = lastName;
     }
 
-    public int getNICno() {
+    public String getNICno() {
         return NICno;
     }
 
-    public void setNICno(int NICno) {
+    public void setNICno(String NICno) {
         this.NICno = NICno;
     }
 
