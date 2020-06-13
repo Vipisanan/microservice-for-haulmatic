@@ -28,8 +28,24 @@ public class RolesController {
         return roleService.getAll();
     }
 
+    @GetMapping("/{id}")
+    public RoleModel getById(@PathVariable String id){
+        return roleService.getById(id);
+    }
+
     @PostMapping
     public RoleModel addEmployer(@RequestBody RoleDTO roleDTO) {
         return roleService.addEmployer(roleDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteEmployerById(@PathVariable String id) {
+        roleService.deleteEmployerById(id);
+        return "deleted";
+    }
+
+    @PutMapping("/{id}")
+    public RoleModel updateEmployer(@PathVariable String id, @RequestBody RoleDTO roleDTO) {
+        return roleService.updateEmployer(id, roleDTO);
     }
 }

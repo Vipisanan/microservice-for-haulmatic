@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RoleService {
@@ -27,5 +28,20 @@ public class RoleService {
         RoleModel roleModel = new RoleModel();
         BeanUtils.copyProperties(roleDTO , roleModel);
         return roleRepository.save(roleModel);
+    }
+
+    public void deleteEmployerById(String id) {
+        roleRepository.deleteById(id);
+    }
+
+    public RoleModel updateEmployer(String id, RoleDTO roleDTO) {
+        RoleModel roleModel;
+        roleModel = roleRepository.findFirstById(id);
+        BeanUtils.copyProperties(roleDTO , roleModel);
+        return roleRepository.save(roleModel);
+    }
+
+    public RoleModel getById(String id) {
+        return roleRepository.findFirstById(id);
     }
 }
