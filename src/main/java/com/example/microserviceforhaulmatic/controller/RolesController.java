@@ -48,4 +48,16 @@ public class RolesController {
     public RoleModel updateEmployer(@PathVariable String id, @RequestBody RoleDTO roleDTO) {
         return roleService.updateEmployer(id, roleDTO);
     }
+
+    @ApiOperation(value = "Retrieve a role from the NIC no")
+    @GetMapping("nic/{nic}")
+    public RoleModel getByNic(@PathVariable String nic){
+        return roleService.getByNic(nic);
+    }
+
+    @ApiOperation(value = "A list of roles retrieve by the organization and the role type.")
+    @GetMapping("/role-type/{roleType}/organization/{organization}")
+    public RoleModel getByRoleTypeAndOrganization(@PathVariable String roleType , @PathVariable String organization){
+        return roleService.getByRoleTypeAndOrganization(roleType , organization);
+    }
 }

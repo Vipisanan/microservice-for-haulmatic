@@ -44,4 +44,12 @@ public class RoleService {
     public RoleModel getById(String id) {
         return roleRepository.findFirstById(id);
     }
+
+    public RoleModel getByNic(String nic) {
+        return roleRepository.findFirstByNICno(nic);
+    }
+
+    public RoleModel getByRoleTypeAndOrganization(String roleType, String organization) {
+        return roleRepository.findFirstByRoleTypeAndOrganization(roleType ,organization);
+    }
 }

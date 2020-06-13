@@ -1,5 +1,6 @@
 package com.example.microserviceforhaulmatic.model;
 
+import com.mongodb.lang.NonNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -27,7 +28,8 @@ public class RoleModel {
     @Indexed(name = "lastName")
     private String lastName;
 
-    @Indexed(name = "NICno")
+    
+    @Indexed(name = "NICno" , unique = true)
     private String NICno;
 
     @Indexed(name = "roleType")
