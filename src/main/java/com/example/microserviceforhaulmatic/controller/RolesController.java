@@ -27,7 +27,7 @@ public class RolesController {
         return roleService.getAll();
     }
     @PostMapping
-    public RoleModel addEmployee(@RequestBody RoleModel roleModel){
-        return roleModel;
+    public RoleModel addEmployer(@RequestBody RoleModel roleModel){
+        return roleService.addEmployer(roleModel);
     }
 }

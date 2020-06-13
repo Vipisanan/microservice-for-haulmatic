@@ -20,4 +20,8 @@ public class RoleService {
         List<RoleModel> roleModels = roleRepository.findAll();
         return roleModels;
     }
+
+    public RoleModel addEmployer(RoleModel roleModel) {
+        return roleRepository.save(roleModel);
+    }
 }

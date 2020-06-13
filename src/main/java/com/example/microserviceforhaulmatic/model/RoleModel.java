@@ -1,13 +1,22 @@
 package com.example.microserviceforhaulmatic.model;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("Role")
+import java.util.Date;
+
+@Document("role")
 public class RoleModel {
     @Id
     private String id;
+
+    @CreatedDate
+    private Date createdDate;
+    @LastModifiedDate
+    private Date lastModifiedDate;
 
     @Indexed(name = "organization")
     private String organization;
@@ -27,8 +36,10 @@ public class RoleModel {
     public RoleModel() {
     }
 
-    public RoleModel(String id, String organization, String firstName, String lastName, int NICno, String roleType) {
+    public RoleModel(String id, Date createdDate, Date lastModifiedDate, String organization, String firstName, String lastName, int NICno, String roleType) {
         this.id = id;
+        this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
         this.organization = organization;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -82,5 +93,21 @@ public class RoleModel {
 
     public void setRoleType(String roleType) {
         this.roleType = roleType;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 }
