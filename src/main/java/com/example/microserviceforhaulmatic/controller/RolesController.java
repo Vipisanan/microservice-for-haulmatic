@@ -7,6 +7,9 @@ import com.example.microserviceforhaulmatic.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,7 +19,7 @@ import java.util.List;
 @RequestMapping("/role")
 @Api(value = "microservice", description = "Haulmatic microservice")
 
-public class RolesController {
+public class RolesController extends Exception {
     private RoleService roleService;
 
     @Autowired
@@ -31,8 +34,13 @@ public class RolesController {
     }
 
     @GetMapping("/{id}")
-    public RoleModel getById(@PathVariable String id){
-        return roleService.getById(id);
+    public ResponseEntity<?> getById(@PathVariable String id) {
+        RoleModel roleModel = roleService.getById(id);
+        if (roleModel == null) {
+            return new ResponseEntity<>("NO content", HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(roleModel, HttpStatus.OK);
+        }
     }
 
     @PostMapping
@@ -53,13 +61,13 @@ public class RolesController {
 
     @ApiOperation(value = "Retrieve a role from the NIC no")
     @GetMapping("nic/{nic}")
-    public RoleModel getByNic(@PathVariable String nic){
+    public RoleModel getByNic(@PathVariable String nic) {
         return roleService.getByNic(nic);
     }
 
     @ApiOperation(value = "A list of roles retrieve by the organization and the role type.")
     @GetMapping("/role-type/{roleType}/organization/{organization}")
-    public RoleSpecificDTO getByRoleTypeAndOrganization(@PathVariable String roleType , @PathVariable String organization){
-        return roleService.getByRoleTypeAndOrganization(roleType , organization);
+    public RoleSpecificDTO getByRoleTypeAndOrganization(@PathVariable String roleType, @PathVariable String organization) {
+        return roleService.getByRoleTypeAndOrganization(roleType, organization);
     }
 }
