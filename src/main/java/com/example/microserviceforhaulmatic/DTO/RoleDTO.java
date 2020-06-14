@@ -1,6 +1,11 @@
 package com.example.microserviceforhaulmatic.DTO;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.mongodb.core.index.Indexed;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class RoleDTO {
 
@@ -10,6 +15,8 @@ public class RoleDTO {
 
     private String lastName;
 
+    @NotBlank(message = "NIC number is mandatory")
+    @Pattern(regexp = "^([0-9]{9}(v|V)|([0-9]{12}))$" , message = "Incorrect NIC number")
     private String NICno;
 
     private String roleType;
