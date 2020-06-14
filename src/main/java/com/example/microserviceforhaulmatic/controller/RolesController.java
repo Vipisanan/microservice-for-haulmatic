@@ -1,6 +1,7 @@
 package com.example.microserviceforhaulmatic.controller;
 
 import com.example.microserviceforhaulmatic.DTO.RoleDTO;
+import com.example.microserviceforhaulmatic.DTO.RoleSpecificDTO;
 import com.example.microserviceforhaulmatic.model.RoleModel;
 import com.example.microserviceforhaulmatic.service.RoleService;
 import io.swagger.annotations.Api;
@@ -22,7 +23,7 @@ public class RolesController {
         this.roleService = roleService;
     }
 
-    @ApiOperation(value = "View a list of employees", response = Iterable.class)
+    @ApiOperation(value = "View a list of employees")
     @GetMapping
     public List<RoleModel> getAll() {
         return roleService.getAll();
@@ -57,7 +58,7 @@ public class RolesController {
 
     @ApiOperation(value = "A list of roles retrieve by the organization and the role type.")
     @GetMapping("/role-type/{roleType}/organization/{organization}")
-    public RoleModel getByRoleTypeAndOrganization(@PathVariable String roleType , @PathVariable String organization){
+    public RoleSpecificDTO getByRoleTypeAndOrganization(@PathVariable String roleType , @PathVariable String organization){
         return roleService.getByRoleTypeAndOrganization(roleType , organization);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.microserviceforhaulmatic.service;
 
 import com.example.microserviceforhaulmatic.DTO.RoleDTO;
+import com.example.microserviceforhaulmatic.DTO.RoleSpecificDTO;
 import com.example.microserviceforhaulmatic.model.RoleModel;
 import com.example.microserviceforhaulmatic.repository.RoleRepository;
 import org.springframework.beans.BeanUtils;
@@ -49,7 +50,9 @@ public class RoleService {
         return roleRepository.findFirstByNICno(nic);
     }
 
-    public RoleModel getByRoleTypeAndOrganization(String roleType, String organization) {
-        return roleRepository.findFirstByRoleTypeAndOrganization(roleType ,organization);
+    public RoleSpecificDTO getByRoleTypeAndOrganization(String roleType, String organization) {
+        RoleSpecificDTO roleSpecificDTO = new RoleSpecificDTO();
+        BeanUtils.copyProperties(roleRepository.findFirstByRoleTypeAndOrganization(roleType ,organization) ,roleSpecificDTO);
+        return roleSpecificDTO;
     }
 }
