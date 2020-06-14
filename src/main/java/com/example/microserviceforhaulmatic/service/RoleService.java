@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RoleService {
+public class RoleService extends Exception{
     private RoleRepository roleRepository;
 
     @Autowired
@@ -26,7 +26,7 @@ public class RoleService {
 
     public RoleModel addEmployer(RoleDTO roleDTO) {
         RoleModel roleModel = new RoleModel();
-        BeanUtils.copyProperties(roleDTO , roleModel);
+        BeanUtils.copyProperties(roleDTO, roleModel);
         return roleRepository.save(roleModel);
     }
 
@@ -37,7 +37,7 @@ public class RoleService {
     public RoleModel updateEmployer(String id, RoleDTO roleDTO) {
         RoleModel roleModel;
         roleModel = roleRepository.findFirstById(id);
-        BeanUtils.copyProperties(roleDTO , roleModel);
+        BeanUtils.copyProperties(roleDTO, roleModel);
         return roleRepository.save(roleModel);
     }
 
@@ -49,9 +49,16 @@ public class RoleService {
         return roleRepository.findFirstByNICno(nic);
     }
 
-    public RoleSpecificDTO getByRoleTypeAndOrganization(String roleType, String organization) {
-        RoleSpecificDTO roleSpecificDTO = new RoleSpecificDTO();
-        BeanUtils.copyProperties(roleRepository.findFirstByRoleTypeAndOrganization(roleType ,organization) ,roleSpecificDTO);
-        return roleSpecificDTO;
+    public RoleSpecificDTO getByRoleTypeAndOrganization(String roleType, String organization) throws Exception {
+        try {
+            RoleSpecificDTO roleSpecificDTO = new RoleSpecificDTO();
+            BeanUtils.copyProperties(roleRepository.findFirstByRoleTypeAndOrganization(roleType, organization), roleSpecificDTO);
+            return roleSpecificDTO;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e);
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+
     }
 }
