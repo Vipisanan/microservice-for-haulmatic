@@ -1,6 +1,7 @@
 package com.example.microserviceforhaulmatic.service;
 
 import com.example.microserviceforhaulmatic.config.MyUserDetails;
+import com.example.microserviceforhaulmatic.model.UserModel;
 import com.example.microserviceforhaulmatic.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,9 @@ public class MyUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return new MyUserDetails(userRepository.findByUserName(s));
+        UserModel user = userRepository.findByUserName(s);
+        if (user == null)
+            throw new UsernameNotFoundException("User 404");
+        return new MyUserDetails(user);
     }
 }
