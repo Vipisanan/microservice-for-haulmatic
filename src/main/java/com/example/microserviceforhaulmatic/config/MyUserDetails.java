@@ -1,5 +1,6 @@
 package com.example.microserviceforhaulmatic.config;
 
+import com.example.microserviceforhaulmatic.model.UserModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,10 +9,10 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public class MyUserDetails implements UserDetails {
-    public String userName;
+    public UserModel userModel;
 
-    public MyUserDetails(String userName) {
-        this.userName = userName;
+    public MyUserDetails(UserModel userModel) {
+        this.userModel = userModel;
     }
 
     public MyUserDetails() {
@@ -19,17 +20,17 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        return Arrays.asList(new SimpleGrantedAuthority(userModel.getRole()));
     }
 
     @Override
     public String getPassword() {
-        return "1234";
+        return userModel.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return userModel.getUserName();
     }
 
     @Override
