@@ -2,6 +2,7 @@ package com.example.microserviceforhaulmatic.controller;
 
 import com.example.microserviceforhaulmatic.DTO.RoleDTO;
 import com.example.microserviceforhaulmatic.DTO.RoleSpecificDTO;
+import com.example.microserviceforhaulmatic.exception.ProductNotFoundException;
 import com.example.microserviceforhaulmatic.model.RoleModel;
 import com.example.microserviceforhaulmatic.service.RoleService;
 import io.swagger.annotations.Api;
@@ -29,9 +30,17 @@ public class RolesController extends Exception {
 
     @ApiOperation(value = "View a list of employees")
     @GetMapping
-    public List<RoleModel> getAll() {
-        return roleService.getAll();
+    public ResponseEntity<?> getAll() {
+        List<RoleModel> list = roleService.getAll();
+        if (list.isEmpty()){
+           throw new ProductNotFoundException();
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
+//    @GetMapping
+//    public List<RoleModel> getAll() {
+//        return roleService.getAll();
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable String id) {
