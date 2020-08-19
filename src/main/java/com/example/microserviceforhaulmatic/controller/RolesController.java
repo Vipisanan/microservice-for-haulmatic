@@ -54,6 +54,11 @@ public class RolesController extends Exception {
 
     @PostMapping
     public RoleModel addEmployer(@Valid @RequestBody RoleDTO roleDTO) {
+        roleDTO.setFirstName("vv");
+        roleDTO.setLastName("ss");
+        roleDTO.setNICno("942552092v");
+        roleDTO.setOrganization("ss");
+        roleDTO.setRoleType("DRIVER");
         return roleService.addEmployer(roleDTO);
     }
 
